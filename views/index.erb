@@ -1,8 +1,10 @@
-<ul>
-  <% @links.each do |link| %>
-    <li><a href='<% link.url %>'><%= link.title %></a></li>
-  <% end %>
-</ul>
+<% if @links %>
+  <ul>
+    <% @links.each do |link| %>
+      <li><a href="<%= link.url %>"><%= link.title %></a></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <div id="new-link">
   <form action="/links" method="post">
