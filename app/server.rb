@@ -10,8 +10,8 @@ require_relative './helpers/helpers'
 class BookmarkManager < Sinatra::Base
 
   set :views,  Proc.new { File.join(root, "..", "views")  }
-  set :public, Proc.new { File.join(root, "..", "public") }
-  
+  set :public_folder, Proc.new { File.join(root, "..", "public_folder") }
+
   enable :sessions
   set :session_secret, 'super secret'
   use Rack::Flash
@@ -116,6 +116,10 @@ class BookmarkManager < Sinatra::Base
       flash[:errors] = user.errors.full_messages
       erb :"users/set_new_password"
     end
+  end
+
+  get 'links/link' do
+    erb :link
   end
 
   helpers Helpers
