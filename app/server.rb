@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/partial'
 require 'data_mapper'
 require 'rack-flash'
 require './lib/link'
@@ -8,9 +9,11 @@ require_relative './data_mapper_setup'
 require_relative './helpers/helpers'
 
 class BookmarkManager < Sinatra::Base
+  register Sinatra::Partial
 
   set :views,  Proc.new { File.join(root, "..", "views")  }
   set :public_folder, Proc.new { File.join(root, "..", "public_folder") }
+  set :partial_template_engine, :erb
 
   enable :sessions
   set :session_secret, 'super secret'
@@ -118,8 +121,16 @@ class BookmarkManager < Sinatra::Base
     end
   end
 
-  get 'links/link' do
-    erb :link
+  get '/links/new' do
+    erb :"links/new"
+  end
+
+  post '/links/new' do
+    url = params["url"]
+    title = params["title"]
+    tags = params["tags"].split(" ").map{|tag| Tag.first_or_create(:text => tag)}
+    Link.create(:url => url, :title => title, :tags => tags)
+    redirect to('/')
   end
 
   helpers Helpers
