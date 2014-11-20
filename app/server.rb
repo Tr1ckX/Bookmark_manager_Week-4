@@ -9,8 +9,9 @@ require_relative './helpers/helpers'
 
 class BookmarkManager < Sinatra::Base
 
-  set :views, Proc.new { File.join(root, "..", "views") }
-
+  set :views,  Proc.new { File.join(root, "..", "views")  }
+  set :public, Proc.new { File.join(root, "..", "public") }
+  
   enable :sessions
   set :session_secret, 'super secret'
   use Rack::Flash
@@ -76,7 +77,45 @@ class BookmarkManager < Sinatra::Base
   delete '/sessions' do
     session.clear
     flash[:notice] = 'Good bye!'
-    redirect '/'
+    redirect to('/')
+  end
+
+  get '/password_reset' do
+    erb :"users/password_reset"
+  end
+
+  post '/password_reset' do
+    email = params[:email]
+    user = User.first(:email => email)
+    token = user.generate_password_token
+    stamp = user.generate_new_time_stamp
+    user.update(password_token: token, password_token_timestamp: stamp)
+    p User.first(:email => email)
+    flash[:notice] = "Email sent to #{email}!"
+    redirect to('/')
+  end
+
+
+  get '/users/reset_password/:token' do
+    @token = params[:token]
+    erb :'users/set_new_password'
+  end
+
+  get '/users/set_new_password' do
+    erb :"users/set_new_password"
+  end
+
+  post '/users/set_new_password' do
+    @token = params[:password_token]
+    user = User.first(:password_token => @token)
+    user.update(password: params[:password], password_confirmation: params[:password_confirmation])
+    if user.save
+      session[:user_id] = user.id
+      redirect to('/sessions/new')
+    else
+      flash[:errors] = user.errors.full_messages
+      erb :"users/set_new_password"
+    end
   end
 
   helpers Helpers
