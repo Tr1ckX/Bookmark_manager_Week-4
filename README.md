@@ -14,14 +14,19 @@ Bookmark manager for everyone!
 
 Using everything we learnt plus a little bit of database handling and CSS. What can be wrong?
 
-Learning how to use a webserver application
-  - routes & views
-  - binding users to sessions
-  - passing information with params
-  - using embedded Ruby in HTML
-  - testing the pages on localhost with a rack app
+PSQL in terminal
+  - manage the databases
+  - manage the data in the databases (try not to lose them)
+  - fundamentals of the relational database 
 
-Lerning the Behaviour Driven Development
-  - Cucumber to expect what is going to happen
-  - Capybara to check if happens
-  - TDD and pair program to make it happen
+User handling 
+  - signing up, in, out
+  - data encryption for safe password storing (BCrypt)
+
+CSS
+  - how to use the styles on the page elements
+
+Heroku
+  - how to publish the finished product
+
+Yes, it was a long week.
