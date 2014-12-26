@@ -29,4 +29,6 @@ CSS
 Heroku
   - how to publish the finished product
 
+BDD, TDD, and pair programming.
+
 Yes, it was a long week.
