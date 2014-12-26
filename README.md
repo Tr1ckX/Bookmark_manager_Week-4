@@ -12,7 +12,7 @@ Bookmark manager for everyone!
 
 <h5> Fourth week at [Makers Academy](http://www.makersacademy.com) 
 
-Using everything we learnt plus a little bit of database handling and CSS. What can be wrong?
+Using everything we learnt plus a little bit of database handling and CSS. Then publish it, what can be wrong?
 
 PSQL in terminal
   - manage the databases
