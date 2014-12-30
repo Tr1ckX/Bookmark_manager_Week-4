@@ -32,3 +32,5 @@ Heroku
 BDD, TDD, and pair programming.
 
 Yes, it was a long week.
+
+You can find this week's challenge [here](https://github.com/Tr1ckX/chitter_Week-4)
